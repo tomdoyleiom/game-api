@@ -27,7 +27,6 @@ Task contains 2 sections:
 - git ignored the node modules
 - created catch all 404 routing
 - created cluster on cloud.mongodb.com
-  - created user (admin, `U*15ofIqLN6F`)
 - testing basic end point (get empty list)
 - created [trello board of tasks](https://trello.com/b/Gq22iqLY/game-api)
 -
