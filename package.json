@@ -4,7 +4,8 @@
   "description": "Task contains 2 sections:",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "debug": "nodemon --inspect app.js"
   },
   "repository": {
     "type": "git",

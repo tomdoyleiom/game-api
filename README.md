@@ -30,4 +30,4 @@ Task contains 2 sections:
   - created user (admin, `U*15ofIqLN6F`)
 - testing basic end point (get empty list)
 - created [trello board of tasks](https://trello.com/b/Gq22iqLY/game-api)
--
+- created CRUD endpoints for report

@@ -15,9 +15,8 @@ const gameRoute = require('./routes/games');
 const reportRoute = require('./routes/report');
 
 // TODO: handle middleware here.
-
-app.use('/games', gameRoute);
 app.use('/games/report', reportRoute);
+app.use('/games', gameRoute);
 app.get('/', (req, res) => {
   res.send('we are on home');
 });
