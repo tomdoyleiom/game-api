@@ -1,0 +1,28 @@
+{
+  "name": "games-api",
+  "version": "1.0.0",
+  "description": "Task contains 2 sections:",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomdoyleiom/game-api.git"
+  },
+  "author": "Tom Doyle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomdoyleiom/game-api/issues"
+  },
+  "homepage": "https://github.com/tomdoyleiom/game-api#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.8"
+  }
+}

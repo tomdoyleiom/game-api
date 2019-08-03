@@ -1,0 +1,14 @@
+{
+  "user_with_most_comments": "Alison",
+  "highest_rated_game": "Uncharted 4",
+  "average_likes_per_game": [
+    {
+      "title": "Call of Duty, Infinite Warfare",
+      "average_likes": 4
+    },
+    {
+      "title": "Uncharted 4",
+      "average_likes": 7
+    }
+  ]
+}
