@@ -20,7 +20,8 @@ router.post('/', async (req, res) => {
   const comment = new Comment({
     gameId: req.body.gameId,
     user: req.body.user,
-    message: req.body.message
+    message: req.body.message,
+    like: req.body.like
   });
 
   try {

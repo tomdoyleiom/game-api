@@ -4,6 +4,7 @@ const CommentSchema = mongoose.Schema({
   gameId: { type: mongoose.SchemaTypes.ObjectId, required: true },
   user: { type: String, required: true },
   message: { type: String, required: true },
+  like: { type: Number, required: true },
   dateCreated: { type: Date, default: Date.now }
 });
 
