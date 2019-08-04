@@ -23,7 +23,7 @@
   - the output should look like [this](https://gist.github.com/divya051988/cfe18cbd24bbeec62eb2444ff55f3c34)
   - might need so add some additional test data
 
-## Steps
+## Steps undertaken whilst creating this application.
 
 - git init
 - npm init
@@ -36,3 +36,5 @@
 - created CRUD endpoints for report
 - decided to extract comments out into their own model
 - built endpoint for comments
+- created aggregate schemas for generating the report.
+- completed the report endpoint.
