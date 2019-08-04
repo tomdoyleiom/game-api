@@ -12,7 +12,7 @@ const averageLikesSchema = require('../querySchema/averageLikesSchema');
  * list the highest rated game
  * list average likes per game
  */
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     const mostComments = (await Comment.aggregate(mostCommentsSchema))[0]._id;
     const bestGame = (await Game.aggregate(highestRatedGameSchema))[0].title;
@@ -33,8 +33,8 @@ router.get('/', async (req, res) => {
     };
     res.status(200).json(report);
     // list all the games out
-  } catch (err) {
-    res.status(500).json(report);
+  } catch (error) {
+    next(error);
   }
 });
 

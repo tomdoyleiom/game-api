@@ -6,18 +6,19 @@ const Comment = require('../models/Comment');
 /**
  * gets all the games
  */
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     const games = await Game.find();
     res.json(games).send();
-  } catch (err) {}
+  } catch (error) {
+    next(error);
+  }
 });
 /**
  * gets a specific game by id, returns the comments as well.
  */
-router.get('/:gameId', async (req, res) => {
+router.get('/:gameId', async (req, res, next) => {
   try {
-    console.log(req.params.gameId);
     const game = await Game.findById(req.params.gameId);
     // if the game exists, return a 200 ok response.
     if (game) {
@@ -29,16 +30,14 @@ router.get('/:gameId', async (req, res) => {
       res.status(404).send(`unable to find game with id: ${req.params.gameId}`);
     }
   } catch (err) {
-    res
-      .status(404)
-      .send(`unable to find a game with specified id ${req.params.gameId}`);
+    next(error);
   }
 });
 
 /**
  * add a new game to the db.
  */
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   const game = new Game({
     title: req.body.title,
     description: req.body.description,
@@ -52,26 +51,28 @@ router.post('/', async (req, res) => {
   try {
     const savedGame = await game.save();
     res.json(savedGame);
-  } catch (err) {
-    res.json(err);
+  } catch (error) {
+    next(error);
   }
 });
 
 /**
  * delete an existing game from the db
  */
-router.delete('/:gameId', async (req, res) => {
+router.delete('/:gameId', async (req, res, next) => {
   // find game by id
   try {
     await Game.findByIdAndDelete(req.params.gameId);
     res.send(`game with id: ${req.params.gameId} has been deleted`);
-  } catch (err) {}
+  } catch (error) {
+    next(error);
+  }
 });
 
 /**
  * updates a game by its id.
  */
-router.put('/:gameId', async (req, res) => {
+router.put('/:gameId', async (req, res, next) => {
   try {
     const game = await Game.findById(req.params.gameId);
     if (game) {
@@ -81,7 +82,9 @@ router.put('/:gameId', async (req, res) => {
         .status(404)
         .send(`unable to find game with id: ${req.params.gameId} to update`);
     }
-  } catch (err) {}
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

@@ -6,16 +6,12 @@ const Comment = require('../models/Comment');
 /**
  * Gets a comment by its gameId
  */
-router.get('/:gameId', async (req, res) => {
+router.get('/:gameId', async (req, res, next) => {
   try {
-    const comments = await Comment.find({ gameId: req.params.gameId });
+    let comments = await Comment.find({ gameId: req.params.gameId });
     res.status(200).json(comments);
   } catch (error) {
-    res
-      .status(500)
-      .send(
-        `unable to find comments for the game with id: ${req.params.gameId}`
-      );
+    next(error);
   }
 });
 
@@ -23,7 +19,7 @@ router.get('/:gameId', async (req, res) => {
  * creates a comment upon a game with the specified id.
  * sets the date as datetime.now.
  */
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   const comment = new Comment({
     gameId: req.body.gameId,
     user: req.body.user,
@@ -44,8 +40,7 @@ router.post('/', async (req, res) => {
       res.status(404).send(`unable to find game with id: ${comment.gameId}`);
     }
   } catch (error) {
-    console.log(error);
-    res.status(500);
+    next(error);
   }
 });
 

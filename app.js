@@ -2,11 +2,14 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const Error = require('./models/Error');
+
 require('dotenv/config');
 
-//set up cors
+// set up cors
 app.use(cors());
 
+// set up express body parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -15,15 +18,9 @@ const gameRoute = require('./routes/games');
 const reportRoute = require('./routes/report');
 const commentRoute = require('./routes/comments');
 
-// TODO: handle middleware here.
 app.use('/games/report', reportRoute);
 app.use('/games', gameRoute);
 app.use('/comments', commentRoute);
-
-app.use((err, req, res, next) => {
-  logError(err, req, res, next);
-  res.status(500).send('something went wrong');
-});
 
 mongoose.connect(
   process.env.DB_CONNECTION,
@@ -31,14 +28,30 @@ mongoose.connect(
   () => console.log('connected to db')
 );
 
+app.use(async (error, req, res, next) => {
+  await logError(error, req);
+  res.status(500).send('something went wrong, please try again later');
+});
+
 app.listen(process.env.PORT);
 
 /**
- *
- * @param {Error} err
+ * Logs the thrown error to the db.
+ * @param {*} err
  * @param {*} req
  */
-function logError(err, req) {
-  console.error(err.stack);
-  next(err);
+async function logError(err, req) {
+  const error = new Error({
+    error: err,
+    request: {
+      body: req.body,
+      headers: req.headers,
+      originalUrl: req.originalUrl
+    }
+  });
+  const savedError = error.save().catch(err => {
+    // for some reason we can't add this to the db,
+    // so log to the console.
+    console.error(err);
+  });
 }
