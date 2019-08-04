@@ -12,7 +12,9 @@ router.get('/', async (req, res) => {
     res.json(games).send();
   } catch (err) {}
 });
-
+/**
+ * gets a specific game by id, returns the comments as well.
+ */
 router.get('/:gameId', async (req, res) => {
   try {
     console.log(req.params.gameId);
@@ -33,6 +35,9 @@ router.get('/:gameId', async (req, res) => {
   }
 });
 
+/**
+ * add a new game to the db.
+ */
 router.post('/', async (req, res) => {
   const game = new Game({
     title: req.body.title,
@@ -52,6 +57,9 @@ router.post('/', async (req, res) => {
   }
 });
 
+/**
+ * delete an existing game from the db
+ */
 router.delete('/:gameId', async (req, res) => {
   // find game by id
   try {
@@ -60,6 +68,9 @@ router.delete('/:gameId', async (req, res) => {
   } catch (err) {}
 });
 
+/**
+ * updates a game by its id.
+ */
 router.put('/:gameId', async (req, res) => {
   try {
     const game = await Game.findById(req.params.gameId);

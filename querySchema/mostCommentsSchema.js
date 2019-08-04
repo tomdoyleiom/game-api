@@ -1,4 +1,7 @@
-mostComments = [
+/**
+ * returns the user who has made the most comments
+ */
+const mostComments = [
   {
     $group: {
       _id: '$user',

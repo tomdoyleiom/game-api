@@ -1,3 +1,6 @@
+/**
+ * Used to return a list of game id's and their average likes (rounded up using mongo ceiling)
+ */
 const averageLikes = [
   {
     $lookup: {
@@ -29,8 +32,6 @@ const averageLikes = [
   },
   {
     $project: {
-      _id: 0,
-      gameId: '$_id',
       average_likes: 1
     }
   }

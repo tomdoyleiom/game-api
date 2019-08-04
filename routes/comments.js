@@ -3,6 +3,9 @@ const router = express.Router();
 const Game = require('../models/Game');
 const Comment = require('../models/Comment');
 
+/**
+ * Gets a comment by its gameId
+ */
 router.get('/:gameId', async (req, res) => {
   try {
     const comments = await Comment.find({ gameId: req.params.gameId });
@@ -16,6 +19,10 @@ router.get('/:gameId', async (req, res) => {
   }
 });
 
+/**
+ * creates a comment upon a game with the specified id.
+ * sets the date as datetime.now.
+ */
 router.post('/', async (req, res) => {
   const comment = new Comment({
     gameId: req.body.gameId,
@@ -38,6 +45,7 @@ router.post('/', async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+    res.status(500);
   }
 });
 

@@ -5,6 +5,7 @@ const Comment = require('../models/Comment');
 const mostCommentsSchema = require('../querySchema/mostCommentsSchema');
 const highestRatedGameSchema = require('../querySchema/highestRatedGameSchema');
 const averageLikesSchema = require('../querySchema/averageLikesSchema');
+
 /**
  * get a report of all the games
  * list the user with the most comments
@@ -15,16 +16,14 @@ router.get('/', async (req, res) => {
   try {
     const mostComments = (await Comment.aggregate(mostCommentsSchema))[0]._id;
     const bestGame = (await Game.aggregate(highestRatedGameSchema))[0].title;
-
-    debugger;
-
     const allGames = await Game.find();
     const averageLikes = await Comment.aggregate(averageLikesSchema);
 
     averageLikes.forEach(game => {
-      let id = game.gameId.toString();
+      let id = game._id.toString();
       game.title = allGames.find(x => x.id == id).title;
-      delete game.gameId;
+      // don't want to return this field to the actual report, so remove.
+      delete game._id;
     });
 
     const report = {

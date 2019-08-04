@@ -1,3 +1,6 @@
+/**
+ * Returns the highest rated game
+ */
 const highestRatedGame = [
   {
     $sort: {
