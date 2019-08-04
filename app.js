@@ -13,13 +13,12 @@ app.use(express.json());
 // import the routes
 const gameRoute = require('./routes/games');
 const reportRoute = require('./routes/report');
+const commentRoute = require('./routes/comments');
 
 // TODO: handle middleware here.
 app.use('/games/report', reportRoute);
 app.use('/games', gameRoute);
-app.get('/', (req, res) => {
-  res.send('we are on home');
-});
+app.use('/comments', commentRoute);
 
 app.use((err, req, res, next) => {
   logError(err, req, res, next);

@@ -1,6 +1,10 @@
 # game api
 
-Task contains 2 sections:
+## Steps to build and run this application
+
+1. Make sure you have node installed [Available here](https://nodejs.org/en/)
+2. from the terminal run `npm install`
+3. run npm run start
 
 ## part 1
 
@@ -31,3 +35,5 @@ Task contains 2 sections:
 - testing basic end point (get empty list)
 - created [trello board of tasks](https://trello.com/b/Gq22iqLY/game-api)
 - created CRUD endpoints for report
+- decided to extract comments out into their own model
+- built endpoint for comments
