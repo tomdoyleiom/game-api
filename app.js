@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
-const Error = require('./models/Error');
+const errorHandling = require('./utils/errorHandling');
 
 // allows the use of environment variables
 // e.g: process.env.PORT
@@ -20,9 +20,13 @@ const gameRoute = require('./routes/games');
 const reportRoute = require('./routes/report');
 const commentRoute = require('./routes/comments');
 
+// configure express to use routes.
 app.use('/games/report', reportRoute);
 app.use('/games', gameRoute);
 app.use('/comments', commentRoute);
+
+// add custom error middleware
+app.use(errorHandling);
 
 mongoose.connect(
   process.env.DB_CONNECTION,
@@ -30,30 +34,5 @@ mongoose.connect(
   () => console.log('connected to db')
 );
 
-app.use(async (error, req, res, next) => {
-  await logError(error, req);
-  res.status(500).send('something went wrong, please try again later');
-});
 console.log(`listening on port: ${process.env.PORT}`);
 app.listen(process.env.PORT);
-
-/**
- * Logs the thrown error to the db.
- * @param {*} err
- * @param {*} req
- */
-async function logError(err, req) {
-  const error = new Error({
-    error: err,
-    request: {
-      body: req.body,
-      headers: req.headers,
-      originalUrl: req.originalUrl
-    }
-  });
-  const savedError = error.save().catch(err => {
-    // for some reason we can't add this to the db,
-    // so log to the console.
-    console.error(err);
-  });
-}
