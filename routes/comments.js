@@ -6,6 +6,7 @@ const HttpStatus = require('http-status-codes');
 
 /**
  * Gets a comment by its gameId
+ * /comments/:gameId
  */
 router.get('/:gameId', async (req, res, next) => {
   try {
@@ -19,6 +20,7 @@ router.get('/:gameId', async (req, res, next) => {
 /**
  * creates a comment upon a game with the specified id.
  * sets the date as datetime.now.
+ * /comments
  */
 router.post('/', async (req, res, next) => {
   const comment = new Comment({

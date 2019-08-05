@@ -11,6 +11,7 @@ const HttpStatus = require('http-status-codes');
  * list the user with the most comments
  * list the highest rated game
  * list average likes per game
+ * /games/report
  */
 router.get('/', async (req, res, next) => {
   try {

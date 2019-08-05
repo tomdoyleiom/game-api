@@ -6,6 +6,7 @@ const HttpStatus = require('http-status-codes');
 
 /**
  * gets all the games
+ * /games
  */
 router.get('/', async (req, res, next) => {
   try {
@@ -17,6 +18,7 @@ router.get('/', async (req, res, next) => {
 });
 /**
  * gets a specific game by id, returns the comments as well.
+ * /games/:gameId
  */
 router.get('/:gameId', async (req, res, next) => {
   try {
@@ -39,6 +41,7 @@ router.get('/:gameId', async (req, res, next) => {
 
 /**
  * add a new game to the db.
+ * /games
  */
 router.post('/', async (req, res, next) => {
   const game = new Game({
@@ -61,6 +64,7 @@ router.post('/', async (req, res, next) => {
 
 /**
  * delete an existing game from the db
+ * /games/:gameId
  */
 router.delete('/:gameId', async (req, res, next) => {
   // find game by id
@@ -76,6 +80,7 @@ router.delete('/:gameId', async (req, res, next) => {
 
 /**
  * updates a game by its id.
+ * /games/:gameId
  */
 router.put('/:gameId', async (req, res, next) => {
   try {
