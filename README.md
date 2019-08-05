@@ -6,7 +6,7 @@
 2. from the terminal run `npm install`
 3. make sure there is a `.env` file at the root of the solution with values for:
    - PORT (e.g: 8080)
-   - DB_CONNECTION (e.g mongodb+srv://<user>:<password>@cluster0-atygc.mongodb.net/test?retryWrites=true&w=majority)
+   - DB_CONNECTION (e.g mongodb+srv://user:password@cluster0-atygc.mongodb.net/test?retryWrites=true&w=majority)
 4. run `npm run start`
 
 ## part 1
