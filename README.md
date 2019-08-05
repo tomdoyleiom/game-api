@@ -7,7 +7,7 @@
 3. make sure there is a `.env` file at the root of the solution with values for:
    - PORT (e.g: 8080)
    - DB_CONNECTION (e.g mongodb+srv://<user>:<password>@cluster0-atygc.mongodb.net/test?retryWrites=true&w=majority)
-4. run npm run start
+4. run `npm run start`
 
 ## part 1
 
@@ -43,3 +43,5 @@
 - completed the report endpoint.
 - general code cleanup
 - added the http-status-codes package
+- updated the game logic to determine the totalLikes from the comments
+- updated the report logic to determine which game has the highest rating based on the comments
