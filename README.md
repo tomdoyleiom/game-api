@@ -4,11 +4,14 @@
 
 1. Make sure you have node installed [Available here](https://nodejs.org/en/)
 2. from the terminal run `npm install`
-3. run npm run start
+3. make sure there is a `.env` file at the root of the solution with values for:
+   - PORT (e.g: 8080)
+   - DB_CONNECTION (e.g mongodb+srv://<user>:<password>@cluster0-atygc.mongodb.net/test?retryWrites=true&w=majority)
+4. run npm run start
 
 ## part 1
 
-- create a microsoervice with end points of the style:
+- create a microservice with end points of the style:
 - http://localhost:8080/games/:gameId
 - example: http://localhost:8080/games/1 should return the [this json](https://gist.github.com/divya051988/191e42740b1bbc545e2e441337aa1228)
 
@@ -38,3 +41,5 @@
 - built endpoint for comments
 - created aggregate schemas for generating the report.
 - completed the report endpoint.
+- general code cleanup
+- added the http-status-codes package

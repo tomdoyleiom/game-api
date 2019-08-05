@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const Error = require('./models/Error');
 
+// allows the use of environment variables
+// e.g: process.env.PORT
 require('dotenv/config');
 
 // set up cors
