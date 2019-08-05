@@ -28,6 +28,7 @@ app.use('/comments', commentRoute);
 // add custom error middleware
 app.use(errorHandling);
 
+// connect to mongodb
 mongoose.connect(
   process.env.DB_CONNECTION,
   { useNewUrlParser: true, useFindAndModify: false },
