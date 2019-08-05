@@ -25,8 +25,9 @@ router.get('/:gameId', async (req, res, next) => {
     const game = await Game.findById(req.params.gameId);
     // if the game exists, return a 200 ok response.
     if (game) {
-      debugger;
       const comments = await Comment.find({ gameId: req.params.gameId });
+
+      // sums all the likes and returns them as a single value
       let totalLikes = comments.reduce(getTotalLikes, 0);
 
       //add the comments and the likes to the game object
@@ -101,6 +102,7 @@ router.put('/:gameId', async (req, res, next) => {
   }
 });
 
+// used to reduce comments into a total comment value
 function getTotalLikes(total, comment) {
   return total + comment.like;
 }
