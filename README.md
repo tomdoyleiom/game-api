@@ -45,3 +45,21 @@
 - added the http-status-codes package
 - updated the game logic to determine the totalLikes from the comments
 - updated the report logic to determine which game has the highest rating based on the comments
+
+## API structure
+
+GET "/games/" returns all games
+
+GET "/games/:gameId" returns a game by its id, along with its associated comments
+
+GET "/games/report" returns a report of all the games in the database
+
+POST "/games" adds a new game to the db and returns it to the user
+
+DELETE "/games/:gameId" deletes the specified game
+
+PUT "/games/:gameId" updates a specified game
+
+GET "/comments/:gameId" returns comments for a specified game
+
+POST "comments" adds a new comment to the db.
