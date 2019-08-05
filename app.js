@@ -32,7 +32,7 @@ app.use(async (error, req, res, next) => {
   await logError(error, req);
   res.status(500).send('something went wrong, please try again later');
 });
-
+console.log(`listening on port: ${process.env.PORT}`);
 app.listen(process.env.PORT);
 
 /**

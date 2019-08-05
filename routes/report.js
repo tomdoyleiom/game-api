@@ -5,7 +5,7 @@ const Comment = require('../models/Comment');
 const mostCommentsSchema = require('../querySchema/mostCommentsSchema');
 const highestRatedGameSchema = require('../querySchema/highestRatedGameSchema');
 const averageLikesSchema = require('../querySchema/averageLikesSchema');
-
+const HttpStatus = require('http-status-codes');
 /**
  * get a report of all the games
  * list the user with the most comments
@@ -31,7 +31,7 @@ router.get('/', async (req, res, next) => {
       highest_rated_game: bestGame,
       average_likes: averageLikes
     };
-    res.status(200).json(report);
+    res.status(HttpStatus.OK).json(report);
     // list all the games out
   } catch (error) {
     next(error);

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Game = require('../models/Game');
 const Comment = require('../models/Comment');
+const HttpStatus = require('http-status-codes');
 
 /**
  * gets all the games
@@ -9,7 +10,7 @@ const Comment = require('../models/Comment');
 router.get('/', async (req, res, next) => {
   try {
     const games = await Game.find();
-    res.json(games).send();
+    res.status(HttpStatus.OK).json(games);
   } catch (error) {
     next(error);
   }
@@ -25,9 +26,11 @@ router.get('/:gameId', async (req, res, next) => {
       const comments = await Comment.find({ gameId: req.params.gameId });
       //add the comments to the game object
       game.comments = comments;
-      res.status(200).json(game);
+      res.status(HttpStatus.OK).json(game);
     } else {
-      res.status(404).send(`unable to find game with id: ${req.params.gameId}`);
+      res
+        .status(HttpStatus.NOT_FOUND)
+        .send(`unable to find game with id: ${req.params.gameId}`);
     }
   } catch (err) {
     next(error);
@@ -50,7 +53,7 @@ router.post('/', async (req, res, next) => {
 
   try {
     const savedGame = await game.save();
-    res.json(savedGame);
+    res.status(HttpStatus.OK).json(savedGame);
   } catch (error) {
     next(error);
   }
@@ -63,7 +66,9 @@ router.delete('/:gameId', async (req, res, next) => {
   // find game by id
   try {
     await Game.findByIdAndDelete(req.params.gameId);
-    res.send(`game with id: ${req.params.gameId} has been deleted`);
+    res
+      .status(HttpStatus.OK)
+      .send(`game with id: ${req.params.gameId} has been deleted`);
   } catch (error) {
     next(error);
   }
@@ -76,10 +81,10 @@ router.put('/:gameId', async (req, res, next) => {
   try {
     const game = await Game.findById(req.params.gameId);
     if (game) {
-      res.status(200).json(game);
+      res.status(HttpStatus.OK).json(game);
     } else {
       res
-        .status(404)
+        .status(HttpStatus.NOT_FOUND)
         .send(`unable to find game with id: ${req.params.gameId} to update`);
     }
   } catch (error) {

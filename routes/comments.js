@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Game = require('../models/Game');
 const Comment = require('../models/Comment');
+const HttpStatus = require('http-status-codes');
 
 /**
  * Gets a comment by its gameId
@@ -9,7 +10,7 @@ const Comment = require('../models/Comment');
 router.get('/:gameId', async (req, res, next) => {
   try {
     let comments = await Comment.find({ gameId: req.params.gameId });
-    res.status(200).json(comments);
+    res.status(HttpStatus.OK).json(comments);
   } catch (error) {
     next(error);
   }
@@ -34,10 +35,12 @@ router.post('/', async (req, res, next) => {
     if (gameForComments) {
       // if it exists, upload the comment.
       const savedComment = await comment.save();
-      res.status(200).json(savedComment);
+      res.status(HttpStatus.OK).json(savedComment);
     } else {
       // return a 404 not found response.
-      res.status(404).send(`unable to find game with id: ${comment.gameId}`);
+      res
+        .status(HttpStatus.NOT_FOUND)
+        .send(`unable to find game with id: ${comment.gameId}`);
     }
   } catch (error) {
     next(error);
