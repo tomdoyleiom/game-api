@@ -6,7 +6,6 @@ const GameSchema = mongoose.Schema({
   by: { type: String, required: true },
   platform: { type: [String], required: true },
   age_rating: { type: String, required: true },
-  likes: { type: Number, required: true },
   comments: { type: [Object] }
 });
 

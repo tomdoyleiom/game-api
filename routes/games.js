@@ -25,8 +25,13 @@ router.get('/:gameId', async (req, res, next) => {
     const game = await Game.findById(req.params.gameId);
     // if the game exists, return a 200 ok response.
     if (game) {
+      debugger;
       const comments = await Comment.find({ gameId: req.params.gameId });
-      //add the comments to the game object
+      let totalLikes = comments.reduce(getTotalLikes, 0);
+
+      //add the comments and the likes to the game object
+      debugger;
+      game.likes = totalLikes;
       game.comments = comments;
       res.status(HttpStatus.OK).json(game);
     } else {
@@ -50,7 +55,6 @@ router.post('/', async (req, res, next) => {
     by: req.body.by,
     platform: req.body.platform,
     age_rating: req.body.age_rating,
-    likes: req.body.likes,
     comments: req.body.comments
   });
 
@@ -96,5 +100,9 @@ router.put('/:gameId', async (req, res, next) => {
     next(error);
   }
 });
+
+function getTotalLikes(total, comment) {
+  return total + comment.like;
+}
 
 module.exports = router;
